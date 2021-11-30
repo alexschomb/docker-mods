@@ -27,6 +27,7 @@ services:
     volumes:
       - <path to data>:/config
       - <path to data>:/data
+      - <path to data>:/templates
     ports:
       - 80:80
     restart: unless-stopped
