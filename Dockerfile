@@ -1,13 +1,15 @@
+FROM lsiobase/alpine:3.11 as buildstage
+
+# copy local files
+COPY root/ /root-layer/
+
+# runtime stage
 FROM scratch
 
 LABEL maintainer="alexschomb"
 
-# copy local files
-COPY root/ /
-
-# install templates
-RUN chmod +x /install-templates.sh
-CMD /install-templates.sh
+# Add files from buildstage
+COPY --from=buildstage /root-layer/ /
 
 # volumes
 VOLUME /templates
